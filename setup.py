@@ -9,8 +9,8 @@ with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
 setup(name='cbpi4-HA-Sensor',
       version='0.0.1',
       description='CraftBeerPi4 Home Assistant Sensor Plugin',
-      author='Jan Gebauer',
-      author_email='mail@jan-gebauer.de',
+      author='Arco Veenhuizen',
+      author_email='info@veenhuizen.net',
       url='https://github.com/arcidodo/cbpi4-HA-Sensor',
       license='GPLv3',
       include_package_data=True,
@@ -25,4 +25,5 @@ setup(name='cbpi4-HA-Sensor',
       long_description=long_description,
       long_description_content_type='text/markdown'
       )
+
 
