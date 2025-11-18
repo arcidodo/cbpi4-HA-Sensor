@@ -1,7 +1,5 @@
-import logging
-import asyncio
-from cbpi.api import *
-import requests
+from cbpi.api import CBPiSensor, Property, parameters
+import asyncio, requests, logging
 
 logger = logging.getLogger(__name__)
 
@@ -13,33 +11,36 @@ logger = logging.getLogger(__name__)
     Property.Text(label="Entity id", configurable=True, description="Entity id of the temperature sensor in HA (e.g. sensor.kettle_temperature)"),
     Property.Text(label="Authorization Token", configurable=True, description="Authorization token for HA API."),
 ])
+
+
 class HATemperatureSensor(CBPiSensor):
+
     async def on_start(self):
-        self.value = 0.0
-        self.request_session = requests.Session()
-        self.request_session.verify = self.props.get("Check Certificate", "YES") == "YES"
-        self.base_url = self.props.get("Base API entry point")
-        self.entity = self.props.get("Entity id")
-        self.headers = {
-            "Authorization": f"Bearer {self.props.get('Authorization Token')}" if self.props.get("Authorization Token") else "",
+        self.value = 0.0  # initial value visible to CBPi4 UI
+        self.session = requests.Session()
+        self.session.verify = self.props.get("Check Certificate", "YES") == "YES"
+        self.session.headers = {
+            "Authorization": f"Bearer {self.props.get('Authorization Token')}" if self.props.get('Authorization Token') else "",
             "Content-Type": "application/json"
         }
+        self.base_url = self.props.get("Base API entry point")
+        self.entity = self.props.get("Entity id")
         self.timeout = float(self.props.get("Request Timeout", 5))
 
     async def run(self):
         while self.running:
             try:
-                endpoint = f"{self.base_url.strip('/')}/states/{self.entity}"
-                response = self.request_session.get(endpoint, headers=self.headers, timeout=self.timeout)
-                if response.status_code == 200:
-                    data = response.json()
-                    self.value = float(data.get("state", 0))
+                r = self.session.get(f"{self.base_url.strip('/')}/states/{self.entity}", timeout=self.timeout)
+                if r.status_code == 200:
+                    data = r.json()
+                    new_value = float(data.get("state", 0))
+                    self.value = new_value
+                    self.push_update(self.value)  # push update to CBPi4 UI
                     logger.info(f"Temperature updated: {self.value}")
                 else:
-                    logger.error(f"Failed to read temperature: HTTP {response.status_code}")
+                    logger.error(f"HTTP error: {r.status_code}")
             except Exception as e:
                 logger.error(f"Error reading temperature: {e}")
-
             await asyncio.sleep(5)
 
 def setup(cbpi):
