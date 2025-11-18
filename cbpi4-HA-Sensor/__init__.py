@@ -43,7 +43,7 @@ class HATemperatureSensor(CBPiSensor):
                 if response.status_code == 200:
                     data = response.json()
                     self.value = float(data.get("state", 0))
-                    await self.cbpi.sensor.sensor_update(self.id, self.value)
+                    await self.cbpi.sensor.update(self.id, self.value)
                     logger.info(f"Temperature updated: {self.value}")
                 else:
                     logger.error(f"Failed to read temperature: HTTP {response.status_code}")
@@ -54,4 +54,3 @@ class HATemperatureSensor(CBPiSensor):
 
 def setup(cbpi):
     cbpi.plugin.register("HomeAssistant Temperature Sensor", HATemperatureSensor)
-
