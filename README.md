@@ -35,11 +35,12 @@ Direct pip installation via repositories will come in the near future.
 
 ## Configuration
 Enter the appropiate configuration:
-<img width="1191" height="374" alt="Scherm­afbeelding 2025-11-18 om 23 24 20" src="https://github.com/user-attachments/assets/f02588a8-7769-4828-a5b8-c537377e21e7" />
+<img width="1185" height="377" alt="Scherm­afbeelding 2025-11-18 om 23 33 12" src="https://github.com/user-attachments/assets/9271e7a7-0d2d-4f20-8aef-79444ee63259" />
 
 
 # Known problems
 None, *yet*. Please report via "issues"!
+
 
 
 
