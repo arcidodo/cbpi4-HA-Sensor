@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 ])
 
 
-class HATemperatureSensor(CBPiSensor):
+class HASensor(CBPiSensor):
 
     async def on_start(self):
         self.value = 0.0  # initial value visible to CBPi4 UI
@@ -36,12 +36,13 @@ class HATemperatureSensor(CBPiSensor):
                     new_value = float(data.get("state", 0))
                     self.value = new_value
                     self.push_update(self.value)  # push update to CBPi4 UI
-                    logger.info(f"Temperature updated: {self.value}")
+                    logger.info(f"Sensor updated: {self.value}")
                 else:
                     logger.error(f"HTTP error: {r.status_code}")
             except Exception as e:
-                logger.error(f"Error reading temperature: {e}")
+                logger.error(f"Error reading sensor: {e}")
             await asyncio.sleep(5)
 
 def setup(cbpi):
-    cbpi.plugin.register("HomeAssistant Temperature Sensor", HATemperatureSensor)
+    cbpi.plugin.register("HomeAssistant Sensor", HASensor)
+
