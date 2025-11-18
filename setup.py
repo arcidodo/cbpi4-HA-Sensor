@@ -17,7 +17,7 @@ setup(name='cbpi4-HA-Sensor',
       package_data={
         # If any package contains *.txt or *.rst files, include them:
                   '': ['*.txt', '*.rst', '*.yaml'],
-                  'cbpi4-HA-Actor': ['*', '*.txt', '*.rst', '*.yaml']},
+                  'cbpi4-HA-Sensor': ['*', '*.txt', '*.rst', '*.yaml']},
       packages=['cbpi4-HA-Sensor'],
       install_requires=[
             'cbpi4>=4.0.0.34',
@@ -25,5 +25,6 @@ setup(name='cbpi4-HA-Sensor',
       long_description=long_description,
       long_description_content_type='text/markdown'
       )
+
 
 
