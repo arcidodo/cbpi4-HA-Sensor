@@ -1,6 +1,6 @@
 # Pre-release - please use with caution
 
-# CraftBeerPI4 Actor Plugin that controls actors via Home Assistant
+# CraftBeerPI4 Sensor Plugin that reads sensors via Home Assistant
 ![GitHub issues](https://img.shields.io/github/issues-raw/arcidodo/cbpi4-HA-Sensor)
 [![GitHub license](https://img.shields.io/github/license/craftbeerpi/craftbeerpi4)](https://github.com/craftbeerpi/craftbeerpi4/blob/master/LICENSE)
 ![PyPI](https://img.shields.io/pypi/v/cbpi4-HA-Sensor)
@@ -40,5 +40,6 @@ Enter the appropiate configuration:
 
 # Known problems
 None, *yet*. Please report via "issues"!
+
 
 
