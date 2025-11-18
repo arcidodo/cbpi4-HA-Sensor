@@ -8,7 +8,7 @@ logger = logging.getLogger(__name__)
                     description="Enable or disable TLS certificate checking. This setting has no impact for unencrypted connections"),
     Property.Number(label="Request Timeout", configurable=True, description="HTTP request timeout in seconds (default 5)", default_value=5),
     Property.Text(label="Base API entry point", configurable=True, description="REST Api entry point. Must include a uri scheme (http://yourhome:8123/api/...)"),
-    Property.Text(label="Entity id", configurable=True, description="Entity id of the temperature sensor in HA (e.g. sensor.kettle_temperature)"),
+    Property.Text(label="Entity id", configurable=True, description="Entity id of the sensor in HA (e.g. sensor.kettle_temperature)"),
     Property.Text(label="Authorization Token", configurable=True, description="Authorization token for HA API."),
 ])
 
