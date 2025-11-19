@@ -18,7 +18,7 @@ logger = logging.getLogger(__name__)
 class HASensor(CBPiSensor):
 
     async def on_start(self):
-        self.value = 0.0  # initial value visible to CBPi4 UI
+        self.value = 0  # initial value visible to CBPi4 UI
         self.session = requests.Session()
         self.session.verify = self.props.get("Check Certificate", "YES") == "YES"
         self.session.headers = {
@@ -46,6 +46,9 @@ class HASensor(CBPiSensor):
                 logger.error(f"Error reading sensor: {e}")
             await asyncio.sleep(5)
 
+    def get_state(self):
+        return dict(value=self.value)
+
 def setup(cbpi):
     cbpi.plugin.register("HomeAssistant Sensor", HASensor)
-
+    pass
